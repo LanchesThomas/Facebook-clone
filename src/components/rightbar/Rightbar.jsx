@@ -12,65 +12,75 @@ import {
     Typography,
 } from '@mui/material'
 import React from 'react'
-import styled from '@emotion/styled'
+import { styled } from '@mui/material/styles'
+import postData from '../../data/postData.json'
+import { useTheme } from '@material-ui/core/styles'
 
 const StyledBox = styled(Box)(({ theme }) => ({
     border: `1px solid ${theme.palette.primary.light}`,
     borderRadius: '10px',
-    borderTopRightRadius:'0px',
+    borderTopRightRadius: '0px',
     width: '20%',
-    maxWidth: '100%'
+    maxWidth: '100%',
 }))
 
 const StyledBoxContent = styled(Box)({
     position: 'fixed',
     width: 'inherit',
-    maxWidth: 'inherit'
-
+    maxWidth: 'inherit',
 })
 
+const StyledAvatar = styled(Avatar)`
+    overflow: visible;
+    border-radius: 20px;
+
+
+    & img {
+        border-radius: 50%;
+    }
+
+    &:before {
+        display: none;
+        content: '${(props) => props.name}';
+        position: absolute;
+        top: -10px;
+        width: 50px;
+        font-size: 11px;
+        background-color: ${(props) => props.theme.palette.common.white};
+        color: ${(props) => props.theme.palette.common.black};
+        text-align:center;
+    }
+
+    &:hover {
+        &:before {
+            display: block;
+        }
+    }
+`
+
 const Rightbar = () => {
+    const theme = useTheme()
     return (
         <StyledBox
             p={4}
             sx={{ display: { xs: 'none', sm: 'flex' } }}
             justifyContent={'center'}
         >
-            <StyledBoxContent >
-                <Box width="80%">
-                    <Typography variant="h6" fontWeight={100}>
+            <StyledBoxContent>
+                <Box width="100%" py={2} display='flex' flexDirection='column' justifyContent='space-around' gap={2} sx={{border:`2px solid ${theme.palette.background.default}`}}>
+                    <Typography variant="h6" fontWeight={100} sx={{border:'2px solid red'}}>
                         Online Friends
                     </Typography>
-                    <AvatarGroup max={7}>
-                        <Avatar
-                            alt="Remy Sharp"
-                            src="https://picsum.photos/300/300"
-                        />
-                        <Avatar
-                            alt="Travis Howard"
-                            src="https://picsum.photos/300/359"
-                        />
-                        <Avatar
-                            alt="Cindy Baker"
-                            src="https://picsum.photos/300/358"
-                        />
-                        <Avatar alt="Agnes Walker" src="" />
-                        <Avatar
-                            alt="Trevor Henderson"
-                            src="https://picsum.photos/300/341"
-                        />
-                        <Avatar
-                            alt="Peter Dave"
-                            src="https://picsum.photos/300/341"
-                        />
-                        <Avatar
-                            alt="Sohie Park"
-                            src="https://picsum.photos/300/341"
-                        />
-                        <Avatar
-                            alt="Turley Smith"
-                            src="https://picsum.photos/300/341"
-                        />
+                    <AvatarGroup max={7} sx={{ overflow: 'visible', border:'2px solid green' }}>
+                        {postData.map((data) => (
+                            <StyledAvatar
+                                alt={`${data.name}`}
+                                src={`${data.avatar}`}
+                                key={`${data.id}`}
+                                theme={theme}
+                                name={data.name}
+                            />
+                        ))}
                     </AvatarGroup>
                 </Box>
                 <Typography>Latest Photos</Typography>
