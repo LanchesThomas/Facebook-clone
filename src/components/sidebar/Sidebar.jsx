@@ -1,3 +1,4 @@
+import sidebarData from '../../data/sidebarData.json'
 import styled from '@emotion/styled'
 import {
     Article,
@@ -19,85 +20,74 @@ import {
     ListItemText,
     Switch,
 } from '@mui/material'
-import React from 'react'
 
 const StyledBox = styled(Box)(({ theme }) => ({
     border: `1px solid ${theme.palette.primary.light}`,
-    borderRadius:'10px',
+    borderRadius: '10px',
     borderTopLeftRadius: '0px',
     borderLeft: `none`,
-    marginRight: 10,
+    justifyContent:'center',
+    paddingLeft:0,
 }))
 
-const Sidebar = ({setMode, mode}) => {
+const StyledListItemButton = styled(ListItemButton)(({theme})=>( {
+   gap:'10%',
+   [theme.breakpoints.down('xl')]: {
+    flexDirection:'column'
+   }
+
+}))
+const StyledListItemText = styled(ListItemText)(({theme})=>( {
+    
+    [theme.breakpoints.down('lg')]: {
+        display:'none'
+       }
+}))
+
+
+const Sidebar = ({ setMode, mode }) => {
     return (
-        <StyledBox width={'20%'} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Box position={'fixed'}>
+        <StyledBox
+        p={2}
+            sx={{ display: { xs: 'none', sm: 'block', width: '10%' } }}
+        >
+            <Box
+                position={'fixed'}
+                sx={{ width: 'inherit', maxWidth: 'inherit'}}
+            >
                 <List>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={'#home'}>
-                            <ListItemIcon>
-                                <Home />
+                    {sidebarData.map((data) => (
+                        <ListItem disablePadding sx={{}}>
+                            <StyledListItemButton component="a" href={'#home'}>
+                                <ListItemIcon sx={{minWidth:'0px'}}>
+                                    {data.icon === "Home" && <Home />}
+                                    {data.icon === "Article" && <Article />}
+                                    {data.icon === "Group" && <Group />}
+                                    {data.icon === "StoreFront" && <Storefront />}
+                                    {data.icon === "Person" && <Person />}
+                                    {data.icon === "Settings" && <Settings />}
+                                    {data.icon === "Portrait" && <Portrait />}
+                                </ListItemIcon>
+                                <StyledListItemText primary={`${data.title}`}/>
+                            </StyledListItemButton>
+                        </ListItem>
+                    ))}
+
+                    <ListItem disablePadding sx={{mt:'10px'}}>
+                        <StyledListItemButton component="a" href={'#home'}>
+                            <ListItemIcon sx={{minWidth:'0px'}}>
+                                {mode === 'light' ? (
+                                    <LightMode />
+                                ) : (
+                                    <ModeNight />
+                                )}
                             </ListItemIcon>
-                            <ListItemText primary="Homepage" />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={'#home'}>
-                            <ListItemIcon>
-                                <Article />
-                            </ListItemIcon>
-                            <ListItemText primary="Pages" />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={'#home'}>
-                            <ListItemIcon>
-                                <Group />
-                            </ListItemIcon>
-                            <ListItemText primary="Groups" />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={'#home'}>
-                            <ListItemIcon>
-                                <Storefront />
-                            </ListItemIcon>
-                            <ListItemText primary="MarketPlace" />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={'#home'}>
-                            <ListItemIcon>
-                                <Person />
-                            </ListItemIcon>
-                            <ListItemText primary="Friends" />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={'#home'}>
-                            <ListItemIcon>
-                                <Settings />
-                            </ListItemIcon>
-                            <ListItemText primary="Settings" />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={'#home'}>
-                            <ListItemIcon>
-                                <Portrait />
-                            </ListItemIcon>
-                            <ListItemText primary="Profil" />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={'#home'}>
-                            <ListItemIcon>
-                                {mode === 'light' ? <LightMode /> : <ModeNight /> }
-                                
-                            </ListItemIcon>
-                            <Switch onChange={e=> setMode(mode === 'light' ? 'dark' : "light")}/>
-                        </ListItemButton>
+                            <Switch
+                                onChange={(e) =>
+                                    setMode(mode === 'light' ? 'dark' : 'light')
+                                }
+                            />
+                        </StyledListItemButton>
                     </ListItem>
                 </List>
             </Box>

@@ -23,7 +23,10 @@ import postData from '../../data/postData.json'
 
 const StyledCard = styled(Card)(({ theme }) => ({
     boxShadow: 'none',
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    width: '100%',
+    maxWidth: '100%',
+    overflow:'visible',
 }))
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
@@ -43,14 +46,16 @@ const StyledTypography = styled(Typography)({
 const StyledBox = styled(Box)(({ theme }) => ({
     border: `1px solid ${theme.palette.primary.light}`,
     borderRadius: '10px',
+    width: '100%',
 }))
 
 const Post = () => {
     return (
-        <StyledCard sx={{maxWidth: 1000}}>
+        <StyledCard>
             {postData.map((data) => (
                 <StyledBox sx={{ mb: 2 }} key={data.name}>
                     <CardHeader
+                    sx={{}}
                         avatar={
                             <StyledAvatar
                                 aria-label="recipe"
@@ -67,8 +72,7 @@ const Post = () => {
                     />
                     <CardMedia
                         component="img"
-                        height="20%"
-                        width= '80%'
+                        sx={{ height: '20%', width: '100%' }}
                         image={`${data.img}`}
                         alt={`${data.name}-image`}
                     />

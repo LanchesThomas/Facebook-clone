@@ -1,0 +1,37 @@
+[
+    {
+        "id": "1",
+        "title": "HomePage",
+        "icon": "Home"
+    },
+    {
+        "id": "2",
+        "title": "Pages",
+        "icon": "Article"
+    },
+    {
+        "id": "3",
+        "title": "Groups",
+        "icon": "Group"
+    },
+    {
+        "id": "4",
+        "title": "MarketPlace",
+        "icon": "StoreFront"
+    },
+    {
+        "id": "5",
+        "title": "Friends",
+        "icon": "Person"
+    },
+    {
+        "id": "6",
+        "title": "Settings",
+        "icon": "Settings"
+    },
+    {
+        "id": "7",
+        "title": "Profil",
+        "icon": "Portrait"
+    }
+]

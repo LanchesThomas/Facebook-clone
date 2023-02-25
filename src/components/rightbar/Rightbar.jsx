@@ -65,6 +65,8 @@ const Rightbar = () => {
             p={4}
             sx={{ display: { xs: 'none', sm: 'flex' } }}
             justifyContent={'center'}
+            width='20%'
+            
         >
             <StyledBoxContent>
                 <Box width="100%" py={2} display='flex' flexDirection='column' justifyContent='space-around' gap={2} sx={{border:`2px solid ${theme.palette.background.default}`}}>
