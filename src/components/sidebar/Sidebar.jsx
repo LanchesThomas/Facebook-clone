@@ -1,5 +1,7 @@
 import sidebarData from '../../data/sidebarData.json'
-import styled from '@emotion/styled'
+import { styled } from '@mui/material/styles'
+import { useTheme } from '@material-ui/core/styles'
+
 import {
     Article,
     Group,
@@ -26,56 +28,73 @@ const StyledBox = styled(Box)(({ theme }) => ({
     borderRadius: '10px',
     borderTopLeftRadius: '0px',
     borderLeft: `none`,
-    justifyContent:'center',
-    paddingLeft:0,
+    justifyContent: 'center',
+    paddingLeft: 0,
 }))
 
-const StyledListItemButton = styled(ListItemButton)(({theme})=>( {
-   gap:'10%',
-   [theme.breakpoints.down('xl')]: {
-    flexDirection:'column'
-   }
-
+const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
+    gap: '10%',
+    [theme.breakpoints.down('xl')]: {
+        flexDirection: 'column',
+    },
 }))
-const StyledListItemText = styled(ListItemText)(({theme})=>( {
-    
-    [theme.breakpoints.down('lg')]: {
-        display:'none'
-       }
-}))
+const StyledListItemText = styled(ListItemText)`
 
+${(props) => props.theme.breakpoints.down('md')}{
+  & span {
+    font-size: 12px
+  }
+}
+${(props) => props.theme.breakpoints.down('sm')}{
+  & span {
+    display:none
+  }
+}
+
+
+
+
+}
+`
 
 const Sidebar = ({ setMode, mode }) => {
+    const theme = useTheme()
+
     return (
         <StyledBox
-        p={2}
+            p={2}
             sx={{ display: { xs: 'none', sm: 'block', width: '10%' } }}
         >
             <Box
                 position={'fixed'}
-                sx={{ width: 'inherit', maxWidth: 'inherit'}}
+                sx={{ width: 'inherit', maxWidth: 'inherit' }}
             >
                 <List>
                     {sidebarData.map((data) => (
                         <ListItem disablePadding sx={{}}>
                             <StyledListItemButton component="a" href={'#home'}>
-                                <ListItemIcon sx={{minWidth:'0px'}}>
-                                    {data.icon === "Home" && <Home />}
-                                    {data.icon === "Article" && <Article />}
-                                    {data.icon === "Group" && <Group />}
-                                    {data.icon === "StoreFront" && <Storefront />}
-                                    {data.icon === "Person" && <Person />}
-                                    {data.icon === "Settings" && <Settings />}
-                                    {data.icon === "Portrait" && <Portrait />}
+                                <ListItemIcon sx={{ minWidth: '0px' }}>
+                                    {data.icon === 'Home' && <Home />}
+                                    {data.icon === 'Article' && <Article />}
+                                    {data.icon === 'Group' && <Group />}
+                                    {data.icon === 'StoreFront' && (
+                                        <Storefront />
+                                    )}
+                                    {data.icon === 'Person' && <Person />}
+                                    {data.icon === 'Settings' && <Settings />}
+                                    {data.icon === 'Portrait' && <Portrait />}
                                 </ListItemIcon>
-                                <StyledListItemText primary={`${data.title}`}/>
+                                <StyledListItemText
+                                    primary={`${data.title}`}
+                                    theme={theme}
+                                />
                             </StyledListItemButton>
                         </ListItem>
                     ))}
 
-                    <ListItem disablePadding sx={{mt:'10px'}}>
+                    <ListItem disablePadding sx={{ mt: '10px' }}>
                         <StyledListItemButton component="a" href={'#home'}>
-                            <ListItemIcon sx={{minWidth:'0px'}}>
+                            <ListItemIcon sx={{ minWidth: '0px' }}>
                                 {mode === 'light' ? (
                                     <LightMode />
                                 ) : (

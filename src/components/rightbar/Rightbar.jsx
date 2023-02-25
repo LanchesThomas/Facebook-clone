@@ -13,6 +13,7 @@ import {
 } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import postData from '../../data/postData.json'
+import convData from '../../data/convData.json'
 import { useTheme } from '@material-ui/core/styles'
 import React, { useState, useEffect } from 'react'
 
@@ -20,6 +21,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
     border: `1px solid ${theme.palette.primary.light}`,
     borderRadius: '10px',
     borderTopRightRadius: '0px',
+    borderRight: 'none',
     width: '20%',
     maxWidth: '100%',
 }))
@@ -57,9 +59,23 @@ const StyledAvatar = styled(Avatar)`
     }
 `
 
+const StyledTypography = styled(Typography)({
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+})
+const StyledTitle = styled(Typography)`
+white-space:nowrap;
+${(props) => props.theme.breakpoints.down('md')}{
+    font-size: 16px
+}
+`
+
+
 const Rightbar = () => {
     const theme = useTheme()
     const [maxAvatars, setMaxAvatars] = useState(7)
+    const [MaxItem, setMaxItems] = useState(6)
 
     useEffect(() => {
         function handleResize() {
@@ -67,10 +83,13 @@ const Rightbar = () => {
                 setMaxAvatars(1)
             } else if (window.innerWidth < 960) {
                 setMaxAvatars(3)
+                setMaxItems(0)
             } else if (window.innerWidth < 1280) {
                 setMaxAvatars(5)
+                setMaxItems(3)
             } else {
                 setMaxAvatars(7)
+                setMaxItems(6)
             }
         }
 
@@ -97,9 +116,9 @@ const Rightbar = () => {
                     justifyContent="space-around"
                     gap={2}
                 >
-                    <Typography variant="h6" fontWeight={100}>
+                    <StyledTitle variant="h6" fontWeight={100}>
                         Online Friends
-                    </Typography>
+                    </StyledTitle>
                     <AvatarGroup max={maxAvatars} sx={{ overflow: 'visible' }}>
                         {postData.map((data) => (
                             <StyledAvatar
@@ -112,22 +131,27 @@ const Rightbar = () => {
                         ))}
                     </AvatarGroup>
                 </Box>
-                <Typography>Latest Photos</Typography>
-                <ImageList cols={3} ws={2} rowHeight={150}>
-                    {postData.map((data) => (
-                        <ImageListItem >
-                            <img
-                                src={`${data.img}`}
-                                alt={'item.title'}
-                                loading="lazy"
-                            />
-                        </ImageListItem>
-                    ))}
-                </ImageList>
+                <Box sx={{ display: { sm: 'none', lg: 'block' } }}>
+                    <Typography>Latest Photos</Typography>
+                    <ImageList cols={3} rowHeight={100}>
+                        {postData.map(
+                            (data, index) =>
+                                index < MaxItem && (
+                                    <ImageListItem>
+                                        <img
+                                            src={`${data.img}`}
+                                            alt={'item.title'}
+                                            loading="lazy"
+                                        />
+                                    </ImageListItem>
+                                )
+                        )}
+                    </ImageList>
+                </Box>
                 <Box display={'flex'} flexDirection={'column'} mt={2}>
-                    <Typography variant="h6" fontWeight={100}>
+                    <StyledTitle variant="h6" fontWeight={100} >
                         Latest Conversations
-                    </Typography>
+                    </StyledTitle>
                     <List
                         sx={{
                             width: '100%',
@@ -135,86 +159,46 @@ const Rightbar = () => {
                             bgcolor: 'background.paper',
                         }}
                     >
-                        <ListItem alignItems="flex-start">
-                            <ListItemAvatar>
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src="https://picsum.photos/300/300"
-                                />
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary="Brunch this weekend?"
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            sx={{ display: 'inline' }}
-                                            component="span"
-                                            variant="body2"
-                                            color="text.primary"
-                                        >
-                                            Ali Connors
-                                        </Typography>
-                                        {
-                                            " — I'll be in your neighborhood doing errands this…"
+                        {convData.map((data) => (
+                            <Box>
+                                <ListItem alignItems="flex-start">
+                                    <ListItemAvatar>
+                                        <Avatar
+                                            alt="Remy Sharp"
+                                            src={`${data.img}`}
+                                        />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary={
+                                            <StyledTypography>
+                                                {data.title}
+                                            </StyledTypography>
                                         }
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
-                        <Divider variant="inset" component="li" />
-                        <ListItem alignItems="flex-start">
-                            <ListItemAvatar>
-                                <Avatar
-                                    alt="Travis Howard"
-                                    src="https://picsum.photos/300/359"
-                                />
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary="Summer BBQ"
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            sx={{ display: 'inline' }}
-                                            component="span"
-                                            variant="body2"
-                                            color="text.primary"
-                                        >
-                                            to Scott, Alex, Jennifer
-                                        </Typography>
-                                        {
-                                            " — Wish I could come, but I'm out of town this…"
+                                        secondary={
+                                            <React.Fragment>
+                                                <StyledTypography
+                                                    variant="body2"
+                                                    color="text.primary"
+                                                >
+                                                    {data.name}
+                                                </StyledTypography>
+                                                <StyledTypography
+                                                    sx={{
+                                                        display: {
+                                                            sm: 'none',
+                                                            lg: 'block',
+                                                        },
+                                                    }}
+                                                >
+                                                    {data.content}
+                                                </StyledTypography>
+                                            </React.Fragment>
                                         }
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
-                        <Divider variant="inset" component="li" />
-                        <ListItem alignItems="flex-start">
-                            <ListItemAvatar>
-                                <Avatar
-                                    alt="Cindy Baker"
-                                    src="https://picsum.photos/300/358"
-                                />
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary="Oui Oui"
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            sx={{ display: 'inline' }}
-                                            component="span"
-                                            variant="body2"
-                                            color="text.primary"
-                                        >
-                                            Sandra Adams
-                                        </Typography>
-                                        {
-                                            ' — Do you have Paris recommendations? Have you ever…'
-                                        }
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
+                                    />
+                                </ListItem>
+                                <Divider variant="inset" component="li" />
+                            </Box>
+                        ))}
                     </List>
                 </Box>
             </StyledBoxContent>

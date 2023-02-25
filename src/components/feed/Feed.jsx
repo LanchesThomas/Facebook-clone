@@ -4,7 +4,7 @@ import React from 'react'
 import Post from '../card/Post'
 
 const Feed = () => {
-    return <Box width={'60%'} >
+    return <Box sx={{ width: { xs: '100%', sm: '60%' } }}  >
         <Post />
     </Box>
 }

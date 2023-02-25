@@ -15,6 +15,7 @@ function App() {
             mode: mode,
         },
     })
+
     return (
         <ThemeProvider theme={Darktheme}>
             <Box bgcolor={"background.default"} color={"text.primary"}>

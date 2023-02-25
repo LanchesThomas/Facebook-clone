@@ -1,0 +1,25 @@
+[
+    {
+        "id": "1",
+        "title": "Brunch this weekend?",
+        "name": "Ali Connors",
+        "content": "Ill be in your neighborhood doing errands this...",
+        "img": "https://picsum.photos/300/350"
+    },
+    {
+        "id": "2",
+        "title": "Summer BBQ",
+        "name": "to Scott, Alex, Jennifer",
+        "content": "Wish I could come, but I'm out of town this...",
+        "img": "https://picsum.photos/300/351"
+
+    },
+    {
+        "id": "3",
+        "title": "Oui Oui",
+        "name": "Sandra Adams",
+        "content": "Do you have Paris recommendations? Have you ever...",
+        "img": "https://picsum.photos/300/352"
+
+    }
+]
