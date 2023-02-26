@@ -20,7 +20,7 @@ import {
 } from '@mui/icons-material'
 import { styled } from '@mui/material/styles'
 import postData from '../../data/postData.json'
-import { useTheme } from '@material-ui/core/styles'
+import { useTheme } from '@material-ui/core'
 
 const StyledCard = styled(Card)(({ theme }) => ({
     boxShadow: 'none',
@@ -43,6 +43,16 @@ const StyledTypography = styled(Typography)({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
 })
+// const StyledBox = styled(Box)(({ theme }) =>({
+//     border: `1px solid ${theme.palette.primary.light}`,
+//     borderRadius: '10px',
+
+//     [theme.breakpoints.down('xs')] : {
+//         borderRight : 'none',
+//         borderLeft : 'none',
+//         borderRadius: '0px',
+//     }
+// }))
 
 const StyledBox = styled(Box)`
     border: 1px solid ${(props) => props.theme.palette.primary.light};
@@ -58,11 +68,11 @@ const StyledBox = styled(Box)`
 `
 
 const Post = () => {
- 
+ const theme = useTheme()
     return (
         <StyledCard>
             {postData.map((data) => (
-                <StyledBox sx={{ mb: 2 }} key={data.id}>
+                <StyledBox sx={{ mb: 2 }} key={data.id} theme={theme}>
                     <CardHeader
                         sx={{}}
                         avatar={

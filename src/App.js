@@ -19,10 +19,8 @@ function App() {
 
     return (
         <ThemeProvider theme={Darktheme}>
-            <Box bgcolor={"background.default"} color={"text.primary"}>
-                <GlobalStyles
-                    
-                />
+            <Box bgcolor={'background.default'} color={'text.primary'}>
+                <GlobalStyles />
                 <Navbar />
                 <Stack
                     direction="row"
@@ -32,7 +30,7 @@ function App() {
                     my={2}
                     width={'100%'}
                 >
-                    <Sidebar setMode={setMode} mode={mode}/>
+                    <Sidebar setMode={setMode} mode={mode} />
                     <Feed />
                     <Rightbar />
                 </Stack>
