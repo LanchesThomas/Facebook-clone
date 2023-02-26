@@ -1,4 +1,3 @@
-import styled from '@emotion/styled'
 import { Box } from '@mui/material'
 import React from 'react'
 import Post from '../card/Post'

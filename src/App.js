@@ -1,4 +1,5 @@
-import { Box, createTheme, Stack, ThemeProvider } from '@mui/material'
+import { Box, Stack, ThemeProvider } from '@mui/material'
+import { createTheme } from '@mui/material/styles'
 import Feed from './components/feed/Feed'
 import Rightbar from './components/rightbar/Rightbar'
 import Sidebar from './components/sidebar/Sidebar'

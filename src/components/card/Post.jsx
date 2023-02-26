@@ -18,15 +18,16 @@ import {
     MoreVert,
     Share,
 } from '@mui/icons-material'
-import styled from '@emotion/styled'
+import { styled } from '@mui/material/styles'
 import postData from '../../data/postData.json'
+import { useTheme } from '@material-ui/core/styles'
 
 const StyledCard = styled(Card)(({ theme }) => ({
     boxShadow: 'none',
     backgroundColor: 'transparent',
     width: '100%',
     maxWidth: '100%',
-    overflow:'visible',
+    overflow: 'visible',
 }))
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
@@ -43,19 +44,27 @@ const StyledTypography = styled(Typography)({
     textOverflow: 'ellipsis',
 })
 
-const StyledBox = styled(Box)(({ theme }) => ({
-    border: `1px solid ${theme.palette.primary.light}`,
-    borderRadius: '10px',
-    width: '100%',
-}))
+const StyledBox = styled(Box)`
+    border: 1px solid ${(props) => props.theme.palette.primary.light};
+    border-radius: 10px;
+
+    ${(props) => props.theme.breakpoints.down('xs')} {
+        border-right: none;
+        border-left: none;
+        border-radius: 0px;
+    }
+
+    width: 100%;
+`
 
 const Post = () => {
+ 
     return (
         <StyledCard>
             {postData.map((data) => (
-                <StyledBox sx={{ mb: 2 }} key={data.name}>
+                <StyledBox sx={{ mb: 2 }} key={data.id}>
                     <CardHeader
-                    sx={{}}
+                        sx={{}}
                         avatar={
                             <StyledAvatar
                                 aria-label="recipe"
