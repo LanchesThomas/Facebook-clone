@@ -26,13 +26,13 @@ const StyledBoxSm = styled(Box)`
 const StyledListSm = styled(List)`
     width: 100%;
     height: 100%;
+    padding: 0;
     background-color: ${(props) =>
         props.mode === 'light' ? '#FFF' : '#121212'};
 
     ${(props) => props.theme.breakpoints.down('md')} {
         display: flex;
     }
-    margin-top: -10px;
 
 `
 const StyledBoxListSm = styled(List)`
@@ -56,7 +56,7 @@ const Sidebar = ({ setMode, mode }) => {
     const screenWidth = useWindowSize().width
     const [isLarge, setIsLarge] = useState(false)
     useEffect(() => {
-        screenWidth > 600 ? setIsLarge(true) : setIsLarge(false)
+        screenWidth >= 600 ? setIsLarge(true) : setIsLarge(false)
     }, [screenWidth])
 
     if (isLarge) {

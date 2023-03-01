@@ -10,7 +10,8 @@ const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
     flexDirection: 'column',
     [theme.breakpoints.down('sm')]: {
         flexDirection: 'row',
-        alignItems: 'center',
+        height: '100%',
+        border: '2px solid blue',
     },
 }))
 
@@ -40,12 +41,22 @@ const SwitchButton = ({ setMode, mode }) => {
         return (
             <ListItem disablePadding sx={{}}>
                 <StyledListItemButton component="a" href={'#home'}>
-                    <ListItemIcon sx={{ minWidth: '0px' }}>
-                        {mode === 'light' ? <LightMode onClick={(e) =>
-                            setMode(mode === 'light' ? 'dark' : 'light')
-                        }/> : <ModeNight onClick={(e) =>
-                            setMode(mode === 'light' ? 'dark' : 'light')
-                        }/>}
+                    <ListItemIcon
+                        sx={{ minWidth: '0px'}}
+                    >
+                        {mode === 'light' ? (
+                            <LightMode
+                                onClick={(e) =>
+                                    setMode(mode === 'light' ? 'dark' : 'light')
+                                }
+                            />
+                        ) : (
+                            <ModeNight
+                                onClick={(e) =>
+                                    setMode(mode === 'light' ? 'dark' : 'light')
+                                }
+                            />
+                        )}
                     </ListItemIcon>
                 </StyledListItemButton>
             </ListItem>

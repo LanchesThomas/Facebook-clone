@@ -18,10 +18,10 @@ import {
 import sidebarData from '../../data/sidebarData.json'
 
 const StyledListItemButton = styled(ListItemButton)`
-gap: 10%;
-flex-direction: column;
-    ${props => props.theme.breakpoints.down('md')}{
-        
+    gap: 10%;
+    flex-direction: column;
+    ${(props) => props.theme.breakpoints.down('md')} {
+        height: 100%;
     }
 `
 const StyledListItemText = styled(ListItemText)`
@@ -55,6 +55,7 @@ const Listitem = ({ theme }) => {
                             {data.icon === 'Settings' && <Settings />}
                             {data.icon === 'Portrait' && <Portrait />}
                         </ListItemIcon>
+
                         <StyledListItemText
                             primary={`${data.title}`}
                             theme={theme}
