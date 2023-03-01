@@ -17,15 +17,17 @@ import {
 } from '@mui/material'
 import sidebarData from '../../data/sidebarData.json'
 
-const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
-    gap: '10%',
-    [theme.breakpoints.down('xl')]: {
-        flexDirection: 'column',
-    },
-}))
+const StyledListItemButton = styled(ListItemButton)`
+gap: 10%;
+flex-direction: column;
+    ${props => props.theme.breakpoints.down('md')}{
+        
+    }
+`
 const StyledListItemText = styled(ListItemText)`
 
 ${(props) => props.theme.breakpoints.down('md')}{
+
   & span {
     font-size: 12px
   }

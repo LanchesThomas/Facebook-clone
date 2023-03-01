@@ -20,22 +20,28 @@ import {
 } from '@mui/icons-material'
 import { styled } from '@mui/material/styles'
 import postData from '../../data/postData.json'
-import { useTheme } from '@material-ui/core'
+import { useTheme } from '@mui/material/styles'
 
-const StyledCard = styled(Card)(({ theme }) => ({
-    boxShadow: 'none',
-    backgroundColor: 'transparent',
-    width: '100%',
-    maxWidth: '100%',
-    overflow: 'visible',
-}))
+const StyledCard = styled(Card)`
+    box-shadow: none;
+    background-color: transparent;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+
+    ${(props) => props.theme.breakpoints.down('sm')} {
+        & :nth-child(1) {
+            border-top: none;
+        }
+    }
+`
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
     color: 'white',
     border: '1px solid white',
 }))
 const StyledFavorite = styled(Favorite)(({ theme }) => ({
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.light,
 }))
 
 const StyledTypography = styled(Typography)({
@@ -43,22 +49,12 @@ const StyledTypography = styled(Typography)({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
 })
-// const StyledBox = styled(Box)(({ theme }) =>({
-//     border: `1px solid ${theme.palette.primary.light}`,
-//     borderRadius: '10px',
-
-//     [theme.breakpoints.down('xs')] : {
-//         borderRight : 'none',
-//         borderLeft : 'none',
-//         borderRadius: '0px',
-//     }
-// }))
 
 const StyledBox = styled(Box)`
     border: 1px solid ${(props) => props.theme.palette.primary.light};
     border-radius: 10px;
 
-    ${(props) => props.theme.breakpoints.down('xs')} {
+    ${(props) => props.theme.breakpoints.down('sm')} {
         border-right: none;
         border-left: none;
         border-radius: 0px;
@@ -68,9 +64,9 @@ const StyledBox = styled(Box)`
 `
 
 const Post = () => {
- const theme = useTheme()
+    const theme = useTheme()
     return (
-        <StyledCard>
+        <StyledCard theme={theme}>
             {postData.map((data) => (
                 <StyledBox sx={{ mb: 2 }} key={data.id} theme={theme}>
                     <CardHeader
