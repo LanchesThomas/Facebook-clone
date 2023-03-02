@@ -19,8 +19,9 @@ const StyledBoxSm = styled(Box)`
     position: fixed;
     top: 50px;
     width: 100%;
-    height: 5%;
+    height: 7%;
     z-index: 10;
+        
 `
 
 const StyledListSm = styled(List)`
@@ -32,17 +33,14 @@ const StyledListSm = styled(List)`
 
     ${(props) => props.theme.breakpoints.down('md')} {
         display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
 `
-const StyledBoxListSm = styled(List)`
+const StyledBoxListSm = styled(Box)`
     width: 100%;
     height: 100%;
-    background-color: white;
-
-    & a {
-        padding: 2%;
-    }
 
     ${(props) => props.theme.breakpoints.down('md')} {
         display: flex;

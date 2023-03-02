@@ -20,9 +20,6 @@ import sidebarData from '../../data/sidebarData.json'
 const StyledListItemButton = styled(ListItemButton)`
     gap: 10%;
     flex-direction: column;
-    ${(props) => props.theme.breakpoints.down('md')} {
-        height: 100%;
-    }
 `
 const StyledListItemText = styled(ListItemText)`
 

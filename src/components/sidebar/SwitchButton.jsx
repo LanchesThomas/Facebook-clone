@@ -8,10 +8,10 @@ import { useState, useEffect } from 'react'
 const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
     gap: '10%',
     flexDirection: 'column',
-    [theme.breakpoints.down('sm')]: {
+    alignItems:'center',
+    justifyContent:'center',
+    [theme.breakpoints.down('md')]: {
         flexDirection: 'row',
-        height: '100%',
-        border: '2px solid blue',
     },
 }))
 
@@ -24,7 +24,7 @@ const SwitchButton = ({ setMode, mode }) => {
 
     if (isLarge) {
         return (
-            <ListItem disablePadding sx={{ mt: '10px' }}>
+            <ListItem disablePadding sx={{}}>
                 <StyledListItemButton component="a" href={'#home'}>
                     <ListItemIcon sx={{ minWidth: '0px' }}>
                         {mode === 'light' ? <LightMode /> : <ModeNight />}

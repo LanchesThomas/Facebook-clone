@@ -26,8 +26,7 @@ function App() {
                     direction="row"
                     justifyContent="space-between"
                     gap={2}
-                    sx={{ spacing: { xs: 0, sm: 2 } }}
-                    my={2}
+                    my={1}
                     width={'100%'}
                 >
                     <Sidebar setMode={setMode} mode={mode} />
